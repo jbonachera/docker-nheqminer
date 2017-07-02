@@ -1,2 +1,11 @@
 #!/bin/bash
-exec /usr/local/bin/nheqminer_cpu -l ${POOL} -u $DEST.$(cat /proc/sys/kernel/random/uuid) -p ${PASSWORD} -t $PROC
+USERNAME=${ADDRESS:-"t1gjTDBCLjbZocaBBHZ9HiCPVG6b32QNHRH"}
+if [[ "$WORKER_NAME" != "" ]]; then
+  if [[ $WORKER_NAME == "_rand" ]]; then
+    USERNAME=$USERNAME.$(cat /proc/sys/kernel/random/uuid)
+  else
+    USERNAME=$USERNAME.$WORKER_NAME
+  fi
+fi
+echo running: /usr/local/bin/nheqminer_cpu -l ${POOL} -u $USERNAME -p ${PASSWORD} -t $PROC
+exec /usr/local/bin/nheqminer_cpu -l ${POOL} -u $USERNAME -p ${PASSWORD} -t $PROC
