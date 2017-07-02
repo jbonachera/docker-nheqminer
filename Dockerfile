@@ -14,6 +14,6 @@ RUN adduser  -S miner
 RUN apk -U add boost && rm -rf /var/cache/apk
 USER miner
 COPY --from=0 /usr/local/bin/nheqminer_cpu /usr/local/bin/nheqminer_cpu
-CMD /usr/local/bin/nheqminer_cpu -l eu1-zcash.flypool.org:3333 -u $DEST.$(cat /proc/sys/kernel/random/uuid) -p ${PASSWORD} -t $PROC
+CMD /usr/local/bin/nheqminer_cpu -l ${POOL} -u $DEST.$(cat /proc/sys/kernel/random/uuid) -p ${PASSWORD} -t $PROC
 
 
