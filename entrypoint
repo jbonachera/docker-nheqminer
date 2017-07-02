@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /usr/local/bin/nheqminer_cpu -l ${POOL} -u $DEST.$(cat /proc/sys/kernel/random/uuid) -p ${PASSWORD} -t $PROC

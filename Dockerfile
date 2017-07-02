@@ -11,9 +11,8 @@ RUN mv /usr/local/src/nheqminer/Linux_cmake/nheqminer_cpu/nheqminer_cpu /usr/loc
 
 FROM alpine
 RUN adduser  -S miner
-RUN apk -U add boost && rm -rf /var/cache/apk
+RUN apk -U add boost bash && rm -rf /var/cache/apk
 USER miner
 COPY --from=0 /usr/local/bin/nheqminer_cpu /usr/local/bin/nheqminer_cpu
-CMD /usr/local/bin/nheqminer_cpu -l ${POOL} -u $DEST.$(cat /proc/sys/kernel/random/uuid) -p ${PASSWORD} -t $PROC
-
-
+COPY entrypoint /sbin/entrypoint
+ENTRYPOINT ["/sbin/entrypoint"]
